@@ -24,6 +24,13 @@ export default {
   },
   mounted(){
     this.fetchData();
+    
+    eventBus.$on('sighting-added', sighting => this.sightings.push(sighting));
+
+   eventBus.$on('sighting-deleted', id => {
+     const index = this.sightings.indexOf(sighting => sighting.id === id);
+     this.sightings.splice(index, 1);
+   })
   },
   methods: {
     fetchData(){
